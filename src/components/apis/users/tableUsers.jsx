@@ -58,11 +58,11 @@ function TableUsers() {
                             <FaHotel className="h-6 w-6" />
                         </Button>
                     </Tooltip>
-                    <Tooltip content="Editar" placement="top" className="tooltip-centered">
+                    {/* <Tooltip content="Editar" placement="top" className="tooltip-centered">
                         <Button color="warning" size="xs" outline pill>
                             <CiEdit className="h-6 w-6" />
                         </Button>
-                    </Tooltip>
+                    </Tooltip> */}
                     <Tooltip content="Eliminar" placement="top" className="tooltip-centered">
                         <Button color="failure" size="xs" outline pill onClick={() => handleDeleteuser(row.userId)}>
                             <MdDeleteForever className="h-6 w-6" />
@@ -74,7 +74,7 @@ function TableUsers() {
     ];
 
     return (
-        <div style={{marginTop:20, maxWidth: '90%', margin: '0 auto' }}>
+        <div style={{marginTop:20, maxWidth: '80%', margin: '0 auto' }}>
             <DataTable
                 columns={columns}
                 data={filteredUsers}
