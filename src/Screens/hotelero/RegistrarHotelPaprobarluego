@@ -1,0 +1,118 @@
+import React, { useState, useRef } from 'react';
+import SidebarComponent from './Sidebar';
+import { Button, FloatingLabel } from 'flowbite-react';
+
+export const RegistrarHotel = () => {
+    const formRef = useRef(null);
+    const [imageSrcs, setImageSrcs] = useState([]);
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [additionalData, setAdditionalData] = useState({
+        hotelName: '',
+        email: '',
+        address: '',
+        phone: '',
+        city: '',
+        userId: 0,
+        description: ''
+    });
+
+    const handleFileChange = (event) => {
+        const files = event.target.files;
+
+        if (files.length + selectedFiles.length > 3) {
+            alert('No se pueden seleccionar más de 3 imágenes.');
+            setSelectedFiles([]);
+            return;
+        }
+
+        const newFiles = [];
+        for (let i = 0; i < Math.min(files.length, 3 - selectedFiles.length); i++) {
+            const file = files[i];
+            newFiles.push(file);
+        }
+
+        setSelectedFiles([...selectedFiles, ...newFiles]);
+    };
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setAdditionalData({ ...additionalData, [name]: value });
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (selectedFiles.length === 0) {
+            console.log('No se ha seleccionado ningún archivo.');
+            return;
+        }
+
+        const formData = new FormData();
+        selectedFiles.forEach((file) => {
+            formData.append('images', file);
+        });
+
+        formData.append('hotelName', additionalData.hotelName);
+        formData.append('email', additionalData.email);
+        formData.append('address', additionalData.address);
+        formData.append('phone', additionalData.phone);
+        formData.append('city', additionalData.city);
+        formData.append('userId', additionalData.userId);
+        formData.append('description', additionalData.description);
+
+        try {
+            const response = await fetch('http://localhost:8080/api/hotel/saveHotelWithImages', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                console.log('Imagen y datos adicionales enviados con éxito.');
+            } else {
+                console.error('Error al enviar la imagen y datos adicionales:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error al enviar la imagen y datos adicionales:', error);
+        }
+
+        formRef.current.reset();
+        setSelectedFiles([]);
+    };
+
+    return (
+        <div className="flex relative">
+            <SidebarComponent className="absolute left-0 top-0 h-full z-10"/>
+            <div className="flex-grow p-4  sm:ml-64">
+                <h1 className="text-center text-3xl font-bold my-4">Registrar Hotel</h1>
+                <form ref={formRef} onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border border-gray-200 rounded-xl p-4 shadow-xl">
+                        <div className='px-3 space-y-4'>
+                            <FloatingLabel variant="standard" label="Nombre del Hotel" name="hotelName" onChange={handleInputChange} className="w-full" />
+                            <FloatingLabel variant="standard" label="Dirección" name="address" onChange={handleInputChange} className="w-full" />
+                            <FloatingLabel variant="standard" label="Email" name="email" type="email" onChange={handleInputChange} className="w-full" />
+                            <div className='grid grid-cols-1 sm:grid-cols-2'>
+                                <FloatingLabel variant="standard" label="Teléfono" name="phone" onChange={handleInputChange} />
+                                <FloatingLabel variant="standard" label="Ciudad" name="city" onChange={handleInputChange}  />
+                            </div>
+                            <FloatingLabel variant="standard" label="ID del Usuario" name="userId" type="number" onChange={handleInputChange} className="w-full" />
+                            <FloatingLabel variant="standard" label="Descripción" name="description" onChange={handleInputChange} className="w-full" />
+                        </div>
+                        <div>
+                            <input type="file" accept=".jpg" multiple onChange={handleFileChange} className="mb-4" />
+                            <div className="grid grid-cols-1 sm:grid-cols-2">
+                                {selectedFiles.map((file, index) => (
+                                    <img className='object-cover' key={index} src={URL.createObjectURL(file)} alt={`Preview ${index}`} style={{ maxWidth: 250, maxHeight: 200, marginBottom: 10 }} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-center mt-4">
+                        <Button type="submit">Registrar</Button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+
+};
