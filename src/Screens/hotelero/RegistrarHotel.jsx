@@ -4,6 +4,7 @@ import { Button, FloatingLabel } from 'flowbite-react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
+import { URL } from '../../ip';
 
 const validationSchema = Yup.object().shape({
     hotelName: Yup.string().required('Campo Obligatorio'),
@@ -83,7 +84,7 @@ export const RegistrarHotel = () => {
 
 
                         try {
-                            const response = await fetch('http://localhost:8080/api/hotel/saveHotelWithImages', {
+                            const response = await fetch(URL+'api/hotel/saveHotelWithImages', {
                                 method: 'POST',
                                 headers: {
                                     Authorization: `Bearer ${token}`,

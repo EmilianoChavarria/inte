@@ -1,5 +1,6 @@
 import { Button, FloatingLabel } from 'flowbite-react';
 import React, { useState, useRef } from 'react';
+import { URL } from '../../../ip';
 
 const ModalHotel = () => {
     const formRef = useRef(null);
@@ -60,7 +61,7 @@ const ModalHotel = () => {
         formData.append('description', additionalData.description);
 
         try {
-            const response = await fetch('http://localhost:8080/api/hotel/saveHotelWithImages', {
+            const response = await fetch(URL+'api/hotel/saveHotelWithImages', {
                 method: 'POST',
                 body: formData,
             });

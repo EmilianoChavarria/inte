@@ -5,6 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaHotel } from "react-icons/fa";
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
+import { URL } from '../../../ip';
 
 function TableUsers() {
     const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ function TableUsers() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        fetch('http://localhost:8080/api/user/findAll', {
+        fetch(URL+'api/user/findAll', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

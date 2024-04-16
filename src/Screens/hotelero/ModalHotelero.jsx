@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Button, Modal, FloatingLabel, Label, Radio, TextInput } from 'flowbite-react';
 import Swal from 'sweetalert2';
 import { GrUserAdd } from "react-icons/gr";
+import { URL } from '../../ip';
 
 
 const ModalHotelero = ({ hotelId }) => {
@@ -51,7 +52,7 @@ const ModalHotelero = ({ hotelId }) => {
         setAttemptedSubmit(true);
 
         try {
-            const response = await fetch('http://localhost:8080/api/user/saveReceptionist', {
+            const response = await fetch(URL+'api/user/saveReceptionist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

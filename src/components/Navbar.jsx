@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, Dropdown, Navbar, Modal, Button } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'; 
+import { URL } from '../ip';
 
 function Component() {
   const [openModal, setOpenModal] = useState(false);
@@ -9,7 +10,7 @@ function Component() {
 
   useEffect(() => {
     if (openModal) {
-      fetch('http://localhost:8080/api/reservation/getByPerson/3')
+      fetch(URL+'api/reservation/getByPerson/3')
         .then(response => response.json())
         .then(data => {
           if (data.status === 'OK') {

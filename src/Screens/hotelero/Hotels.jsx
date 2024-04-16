@@ -10,6 +10,7 @@ import { FaBoxOpen } from "react-icons/fa";
 import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ModalHotelero from './ModalHotelero';
+import { URL } from '../../ip';
 
 const Hoteles = () => {
     const responsive = {
@@ -49,7 +50,7 @@ const Hoteles = () => {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:8080/api/hotel/delete/${hotelId}`, {
+                fetch(URL+`api/hotel/delete/${hotelId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ const Hoteles = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
-        fetch(`http://localhost:8080/api/hotel/findByUser/${userId}`, {
+        fetch(URL+`api/hotel/findByUser/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

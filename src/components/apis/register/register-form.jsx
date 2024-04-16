@@ -2,6 +2,7 @@ import { Label, Radio, Button, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom'
+import { URL } from '../../../ip';
 
 function RegisterForm() {
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ function RegisterForm() {
         setAttemptedSubmit(true);
     
         try {
-            const response = await fetch('http://localhost:8080/api/user/save', {
+            const response = await fetch(URL+'api/user/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

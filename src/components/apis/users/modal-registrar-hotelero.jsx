@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Button, Modal, FloatingLabel, Label, Radio, TextInput } from 'flowbite-react';
 import Swal from 'sweetalert2';
+import { URL } from '../../../ip';
 
 const ModalHotelero = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -45,7 +46,7 @@ const ModalHotelero = () => {
         setAttemptedSubmit(true);
 
         try {
-            const response = await fetch('http://localhost:8080/api/user/save', {
+            const response = await fetch(URL+'api/user/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

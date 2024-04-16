@@ -8,6 +8,7 @@ import { MdOutlineHotel } from "react-icons/md";
 import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ModalHotelero from '../hotelero/ModalHotelero';
+import { URL } from '../../ip';
 
 const Hoteles = () => {
     const responsive = {
@@ -47,7 +48,7 @@ const Hoteles = () => {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:8080/api/hotel/delete/${hotelId}`, {
+                fetch(URL+`api/hotel/delete/${hotelId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -75,7 +76,7 @@ const Hoteles = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         // const userId = localStorage.getItem('userId');
-        fetch(`http://localhost:8080/api/hotel/findByUser/${userId}`, {
+        fetch(URL+`api/hotel/findByUser/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -132,13 +133,7 @@ const Hoteles = () => {
                                     <div className='flex flex-wrap justify-center space-x-2'>
                                         
 
-                                        <Tooltip content="Ver habitaciones" placement="top" className="tooltip-centered">
-                                            <Link to={`/habitaciones/${hotel.hotelId}`}>
-                                                <Button color="blue" size="xs" outline pill>
-                                                    <MdOutlineHotel className="h-6 w-6" />
-                                                </Button>
-                                            </Link>
-                                        </Tooltip>
+                                        
                                         <Tooltip content="Editar" placement="top" className="tooltip-centered">
                                             <Link to={`/editarHotel/${hotel.hotelId}`}>
                                                 <Button color="warning" size="xs" outline pill>

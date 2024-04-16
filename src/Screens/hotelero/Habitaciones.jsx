@@ -6,6 +6,7 @@ import Carousel from 'react-multi-carousel';
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2';
 import Component from '../../components/Navbar';
+import { URL } from '../../ip';
 
 function Habitaciones() {
     const responsive = {
@@ -33,7 +34,7 @@ function Habitaciones() {
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/room/getByHotel/${hotelId}`)
+        fetch(URL+`api/room/getByHotel/${hotelId}`)
             .then(response => response.json())
             .then(data => {
                 console.log('API response:', data);
@@ -62,7 +63,7 @@ function Habitaciones() {
             confirmButtonText: 'Sí, eliminar habitación'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:8080/api/room/delete/${roomId}`, {
+                fetch(URL+`api/room/delete/${roomId}`, {
                     method: 'DELETE',
                     headers: {
                         Authorization: `Bearer ${token}`

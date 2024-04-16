@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { URL } from '../../ip';
 
 const UserForm = () => {
     const [userData, setUserData] = useState(null);
@@ -8,7 +9,7 @@ const UserForm = () => {
         const userId = localStorage.getItem('userId');
 
         if (userId) {
-            fetch(`http://localhost:8080/api/user/findOne/${userId}`)
+            fetch(URL+`api/user/findOne/${userId}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data); // Mostrar los datos en la consola

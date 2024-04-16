@@ -4,6 +4,9 @@ import image1 from "../../assets/img/bed.png";
 import image2 from "../../assets/img/check.png";
 import image3 from "../../assets/img/cross.png";
 export const StatsCard = () => {
+
+
+    
     return (
         <div className="flex text-gray-800">
             <div className="p-4 w-full">

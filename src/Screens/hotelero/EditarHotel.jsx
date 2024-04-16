@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Label, TextInput } from 'flowbite-react'; // Assuming you have an TextInput component from flowbite-react
 import SidebarComponent from './Sidebar';
+import { URL } from '../../ip';
 
 function EditarHotel() {
     const { hotelId } = useParams();
@@ -9,7 +10,7 @@ function EditarHotel() {
     const [newImages, setNewImages] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/hotel/findOne/${hotelId}`)
+        fetch(URL+`api/hotel/findOne/${hotelId}`)
             .then(response => response.json())
             .then(data => {
                 console.log('API response:', data);
@@ -57,7 +58,7 @@ function EditarHotel() {
 
         const token = localStorage.getItem('token'); // Obtener el token de localStorage
 
-        fetch('http://localhost:8080/api/hotel/updateHotelWithImages', {
+        fetch(URL+'api/hotel/updateHotelWithImages', {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}` // Incluir el token de autenticación en los headers

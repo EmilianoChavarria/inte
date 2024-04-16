@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card } from 'flowbite-react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { URL } from '../ip';
 
 export const EjemploCards = () => {
     const [cities, setCities] = useState([]);
@@ -26,7 +27,7 @@ export const EjemploCards = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/hotel/getCities')
+        fetch(URL+'api/hotel/getCities')
             .then(response => {
                 if (response.ok) {
                     return response.json();

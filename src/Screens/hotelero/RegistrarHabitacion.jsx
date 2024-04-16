@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { Button, Label, TextInput } from 'flowbite-react';
 import SidebarComponent from './Sidebar';
 import RoomTypeForm from './RegistrarType';
+import { URL } from '../../ip';
 
 const validationSchema = Yup.object().shape({
     roomName: Yup.string().required('Campo Obligatorio'),
@@ -25,7 +26,7 @@ const RegistrarHabitacion = () => {
     //getAll de types http://localhost:8080/api/roomType/getAll
     useEffect(() => {
         const token = localStorage.getItem('token');
-        fetch('http://localhost:8080/api/roomType/getAll', {
+        fetch(URL+'api/roomType/getAll', {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`
@@ -92,7 +93,7 @@ const RegistrarHabitacion = () => {
                             const token = localStorage.getItem('token');
                             console.log('Valores del formulario:', JSON.stringify(values));
                             try {
-                                const response = await fetch('http://localhost:8080/api/room/saveWithImage', {
+                                const response = await fetch(URL+'api/room/saveWithImage', {
                                     method: 'POST',
                                     headers: {
                                         Authorization: `Bearer ${token}`

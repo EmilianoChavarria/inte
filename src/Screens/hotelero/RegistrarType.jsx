@@ -1,5 +1,6 @@
 import { Button } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
+import { URL } from '../../ip';
 
 const RoomTypeForm = () => {
     const [typeName, setTypeName] = useState('');
@@ -26,7 +27,7 @@ const RoomTypeForm = () => {
                     }
                 };
 
-                const response = await fetch('http://localhost:8080/api/roomType/getAll', requestOptions);
+                const response = await fetch(URL+'api/roomType/getAll', requestOptions);
                 if (response.ok) {
                     const data = await response.json();
                     setRoomTypes(data.data); // Asignamos solo el array de tipos de habitaciones
@@ -61,7 +62,7 @@ const RoomTypeForm = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8080/api/roomType/save', requestOptions);
+            const response = await fetch(URL+'api/roomType/save', requestOptions);
             if (response.ok) {
                 console.log('Room type saved successfully!');
                 window.location.reload();

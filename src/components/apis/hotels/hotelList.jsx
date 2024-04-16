@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, TextInput, Spinner } from 'flowbite-react';
 import { Link, useParams } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";
+import { URL } from '../../../ip';
 
 function HotelList() {
     const [hotels, setHotels] = useState([]);
@@ -14,7 +15,7 @@ function HotelList() {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:8080/api/hotel/${city}`)
+        fetch(URL+`api/hotel/${city}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

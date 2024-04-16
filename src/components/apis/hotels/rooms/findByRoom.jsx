@@ -8,6 +8,7 @@ import image3 from '../../../../assets/img/lavanderia.png';
 import image4 from '../../../../assets/img/nadador.png';
 import image5 from '../../../../assets/img/loto.png';
 import image6 from '../../../../assets/img/restaurante.png';
+import { URL } from '../../../../ip';
 
 function FindByRoom() {
     const { roomId } = useParams();
@@ -67,7 +68,7 @@ function FindByRoom() {
         };
 
         console.log('Reserva:', reservation)
-        fetch('http://localhost:8080/api/reservation/save', {
+        fetch(URL+'api/reservation/save', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -108,7 +109,7 @@ function FindByRoom() {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/room/findOneRoom/${roomId}`)
+        fetch(URL+`api/room/findOneRoom/${roomId}`)
             .then(response => response.json())
             .then(data => {
                 console.log('API response:', data);

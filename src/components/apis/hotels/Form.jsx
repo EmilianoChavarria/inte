@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { URL } from '../../../ip';
 
 function FileUploadComponent() {
   const [imageSrcs, setImageSrcs] = useState([]);
@@ -58,7 +59,7 @@ function FileUploadComponent() {
     formData.append('description', additionalData.description);
 
     try {
-      const response = await fetch('http://localhost:8080/api/hotel/saveHotelWithImages', {
+      const response = await fetch(URL+'api/hotel/saveHotelWithImages', {
         method: 'POST',
         body: formData,
       });

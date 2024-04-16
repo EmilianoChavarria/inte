@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { MdOutlinePassword } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import Swal from 'sweetalert2';
+import { URL } from '../../../ip';
 
 
 function LoginForm() {
@@ -34,7 +35,7 @@ function LoginForm() {
             password: password
         };
     
-        fetch('http://localhost:8080/api/auth/signin', {
+        fetch(URL+'api/auth/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

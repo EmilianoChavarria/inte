@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from 'flowbite-react';
+import { URL } from '../../../ip';
 
 function FindByHotel() {
     const { hotelId } = useParams();
     const [hotel, setHotel] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/hotel/findOne/${hotelId}`)
+        fetch(URL+`api/hotel/findOne/${hotelId}`)
             .then(response => response.json())
             .then(data => {
                 console.log('API response:', data);

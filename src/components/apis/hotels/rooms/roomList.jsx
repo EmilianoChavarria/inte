@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Card, Button, Spinner } from 'flowbite-react';
+import { URL } from '../../../../ip';
 
 function RoomList() {
     const { hotelId } = useParams();
@@ -9,7 +10,7 @@ function RoomList() {
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/room/getByHotel/${hotelId}`)
+        fetch(URL+`api/room/getByHotel/${hotelId}`)
             .then(response => response.json())
             .then(data => {
                 console.log('API response:', data);
