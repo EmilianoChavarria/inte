@@ -18,9 +18,6 @@ export const HomeHotelero = () => {
 
                 </div>
             </div>
-            <div>
-                {/* Aquí va el tercer componente */}
-            </div>
         </div>
     );
 };

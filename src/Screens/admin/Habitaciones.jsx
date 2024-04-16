@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Card, Button, Spinner, Sidebar, Tooltip } from 'flowbite-react';
-import SidebarComponent from './Sidebar';
+import { Card, Button, Spinner, Tooltip } from 'flowbite-react';
 import Carousel from 'react-multi-carousel';
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2';

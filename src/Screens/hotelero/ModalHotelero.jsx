@@ -1,15 +1,17 @@
 import React, { useState, useRef } from 'react';
 import { Button, Modal, FloatingLabel, Label, Radio, TextInput } from 'flowbite-react';
 import Swal from 'sweetalert2';
+import { GrUserAdd } from "react-icons/gr";
 
-const ModalHotelero = () => {
+
+const ModalHotelero = ({ hotelId }) => {
     const [openModal, setOpenModal] = useState(false);
     const formRef = useRef(null);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
         rol: {
-            rolName: 'HOTELERO_ROLE'
+            rolName: 'RECEPTIONIST_ROLE'
         },
         people: {
             name: '',
@@ -18,7 +20,11 @@ const ModalHotelero = () => {
             birthday: '',
             curp: '',
             sex: ''
-        }
+        },
+        hotel: [
+            //aqui va el hotelId que se manda de la otra secreen
+            { hotelId: hotelId }
+        ]
     });
     const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
@@ -45,7 +51,7 @@ const ModalHotelero = () => {
         setAttemptedSubmit(true);
 
         try {
-            const response = await fetch('http://localhost:8080/api/user/save', {
+            const response = await fetch('http://localhost:8080/api/user/saveReceptionist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,14 +62,18 @@ const ModalHotelero = () => {
                 console.log('Registro exitoso');
                 Swal.fire('¡Registro exitoso!', 'El usuario ha sido registrado correctamente.', 'success');
                 setOpenModal(false);
-                window.location.reload();
+                // window.location.reload();
             } else {
+                console.log(formData);
+
                 const errorData = await response.json();
                 console.error('Error al registrar:', errorData);
                 alert(`Error al registrar: ${errorData.mensaje}`);
             }
         } catch (error) {
             console.error('Error de red:', error);
+            console.log(formData);
+
             alert('Error de red, por favor, intenta de nuevo.');
         }
     };
@@ -78,9 +88,10 @@ const ModalHotelero = () => {
 
     return (
         <>
-            <div className='w-full flex justify-between items-center px-6 mt-6'>
-                <p className='text-4xl'>Listado de Usuarios</p>
-                <Button onClick={() => setOpenModal(true)} pill>Registrar Hotelero</Button>
+            <div >
+                <Button color="warning" onClick={() => setOpenModal(true)} size="xs" outline pill>
+                    <GrUserAdd className="h-6 w-6" />
+                </Button>
             </div>
 
             <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>

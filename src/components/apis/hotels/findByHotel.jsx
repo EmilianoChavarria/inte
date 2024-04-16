@@ -21,7 +21,8 @@ function FindByHotel() {
         return <div>Loading...</div>;
     }
 
-
+//guardar el hotelId
+    localStorage.setItem('hotelId', hotel.data.hotelId);
     const images = hotel.data.images;
 
     return (

@@ -54,7 +54,7 @@ function Component() {
 
   return (
     <Navbar fluid rounded className='shadow-md'>
-      <Navbar.Brand href="/">
+      <Navbar.Brand href="/homeAdmin">
         <img src="https://cdn-icons-png.flaticon.com/512/3009/3009710.png" className="mr-3 h-6 sm:h-9" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">HOTEL AMETO</span>
       </Navbar.Brand>

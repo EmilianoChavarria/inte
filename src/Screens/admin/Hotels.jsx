@@ -5,11 +5,9 @@ import { Button, Spinner, Tooltip } from "flowbite-react";
 import { CiEdit } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { MdOutlineHotel } from "react-icons/md";
-import { FaBoxOpen } from "react-icons/fa";
-
 import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import ModalHotelero from './ModalHotelero';
+import ModalHotelero from '../hotelero/ModalHotelero';
 
 const Hoteles = () => {
     const responsive = {
@@ -76,7 +74,7 @@ const Hoteles = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId');
+        // const userId = localStorage.getItem('userId');
         fetch(`http://localhost:8080/api/hotel/findByUser/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -97,7 +95,7 @@ const Hoteles = () => {
     }, []);
 
     return (
-        <div style={{ maxWidth: '1000px', margin: '0' }}>
+        <div style={{ maxWidth: '1000px' }}>
             {loading ? (
                 <Spinner aria-label="Default status example" />
             ) : hotels.length === 0 ? (
@@ -117,8 +115,7 @@ const Hoteles = () => {
                     removeArrowOnDeviceType={["tablet", "mobile"]}
                     deviceType={"desktop"}
                     dotListClass="custom-dot-list-style"
-                    style={{ height: '1000px' }} // Agregar esta línea
-
+                    className='ml-10 mt-10'
                 >
                     {hotels.map(hotel => (
                         <div key={hotel.hotelId} className="flex-shrink-0 flex-grow-0" style={{ width: '300px' }}>
@@ -133,9 +130,8 @@ const Hoteles = () => {
                                     <p className="mb-4 text-base" style={{ maxHeight: '72px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{hotel.description}</p>
                                     <p className="mb-4 text-base">{hotel.address}</p>
                                     <div className='flex flex-wrap justify-center space-x-2'>
-                                        <Tooltip content="Registrar Recepcionista" placement="top" className="tooltip-centered">
-                                            <ModalHotelero hotelId={hotel.hotelId} />
-                                        </Tooltip>
+                                        
+
                                         <Tooltip content="Ver habitaciones" placement="top" className="tooltip-centered">
                                             <Link to={`/habitaciones/${hotel.hotelId}`}>
                                                 <Button color="blue" size="xs" outline pill>
@@ -143,9 +139,16 @@ const Hoteles = () => {
                                                 </Button>
                                             </Link>
                                         </Tooltip>
-                                        <Tooltip content="Ver Inventario" placement="top" className="tooltip-centered">
-                                            <Button color="success" size="xs" outline pill onClick={() => handleDeleteHotel(hotel.hotelId)}>
-                                                <FaBoxOpen className="h-6 w-6" />
+                                        <Tooltip content="Editar" placement="top" className="tooltip-centered">
+                                            <Link to={`/editarHotel/${hotel.hotelId}`}>
+                                                <Button color="warning" size="xs" outline pill>
+                                                    <CiEdit className="h-6 w-6" />
+                                                </Button>
+                                            </Link>
+                                        </Tooltip>
+                                        <Tooltip content="Eliminar" placement="top" className="tooltip-centered">
+                                            <Button color="failure" size="xs" outline pill onClick={() => handleDeleteHotel(hotel.hotelId)}>
+                                                <FaRegTrashAlt className="h-6 w-6" />
                                             </Button>
                                         </Tooltip>
                                     </div>

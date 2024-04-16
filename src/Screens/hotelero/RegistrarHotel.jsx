@@ -3,6 +3,7 @@ import SidebarComponent from './Sidebar';
 import { Button, FloatingLabel } from 'flowbite-react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import Swal from 'sweetalert2';
 
 const validationSchema = Yup.object().shape({
     hotelName: Yup.string().required('Campo Obligatorio'),
@@ -89,10 +90,13 @@ export const RegistrarHotel = () => {
                                 },
                                 body: formData,
                             });
-
+                        
                             if (response.ok) {
-                                alert('Imagen y datos adicionales enviados con éxito.');
-                                console.log('Imagen y datos adicionales enviados con éxito.');
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Hotel registrado',
+                                    text: 'Imagen y datos adicionales enviados con éxito.',
+                                });
                                 resetForm();
                                 setSelectedFiles([]);
                             } else {
@@ -103,6 +107,7 @@ export const RegistrarHotel = () => {
                         } finally {
                             setSubmitting(false);
                         }
+                        
                     }}
                 >
                     {({ isSubmitting, setFieldValue }) => (

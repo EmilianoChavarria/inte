@@ -16,8 +16,10 @@ import { HomeHotelero } from './Screens/hotelero/Home';
 import { RegistrarHotel } from './Screens/hotelero/RegistrarHotel';
 import ProtectedRoutes from './router/ProtectedRoute';
 import EditarHotel from './Screens/hotelero/EditarHotel';
-import Habitaciones from './Screens/hotelero/Habitaciones';
 import RegistrarHabitacion from './Screens/hotelero/RegistrarHabitacion';
+import Profile from './Screens/user/Profile';
+import HotelsByUser from './Screens/admin/HotelsByUser';
+import Habitaciones from './Screens/admin/Habitaciones';
 
 function App() {
 
@@ -28,7 +30,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />
-                    <Route path='/hotelview' element={<HotelViewCity />} />
+                    <Route path='/hotelview/:city' element={<HotelViewCity />} />
                     <Route path="/rooms/:hotelId" element={<RoomViewHotel />} />
                     <Route path="/findOneHotel/:hotelId" element={<FindOneHotel />} />
                     <Route path="/findOneRoom/:roomId" element={<FindOneRoom />} />
@@ -42,6 +44,8 @@ function App() {
                         <Route path='/editarHotel/:hotelId' element={<EditarHotel />} />
                         <Route path="/habitaciones/:hotelId" element={<Habitaciones />} />
                         <Route path="/registrarHabitacion/:hotelId" element={<RegistrarHabitacion />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path='/hotels/:userId' element={<HotelsByUser />} />
                     </Route>
 
                     <Route path="*" element={<Error />} />
@@ -56,7 +60,11 @@ function Home() {
         <>
             <Component />
             <Car />
-            <EjemploCards />
+            <div className='flex flex-col mt-10'>
+                <h1 className='text-3xl font-bold pl-14 mb-6'>Encuentra el mejor hotel en la mejor ciudad</h1>
+                <EjemploCards />
+            </div>
+
         </>
     );
 }

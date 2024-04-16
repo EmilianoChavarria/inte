@@ -1,7 +1,7 @@
 import { Label, Radio, Button, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function RegisterForm() {
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ function RegisterForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setAttemptedSubmit(true);
-
+    
         try {
             const response = await fetch('http://localhost:8080/api/user/save', {
                 method: 'POST',
@@ -79,6 +79,7 @@ function RegisterForm() {
             });
         }
     };
+    
 
 
 
@@ -159,7 +160,7 @@ function RegisterForm() {
             <TextInput className='mb-4' id="birthday" type="date" onChange={handleChange} name="birthday" color={!isFieldValid('birthday') ? 'failure' : ''} />
 
             <Button type="submit" className='mb-4'>Registrar</Button>
-            <div className='text-sm text-center'>¿Ya tienes una cuenta? <a href="/login" className='text-blue-600/100'>Iniciar Sesión</a></div>
+            <div className='text-sm text-center'>¿Ya tienes una cuenta? <Link to="/login" className='text-blue-600/100'>Iniciar Sesión</Link></div>
         </form>
     );
 }
