@@ -27,7 +27,7 @@ function TableUsers() {
     }, []);
 
     const handleDeleteuser = (id) => {
-        fetch(`http://localhost:8080/api/user/${id}`, {
+        fetch(URL+`api/user/${id}`, {
             method: 'DELETE'
         })
             .then(response => response.json())

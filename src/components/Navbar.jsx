@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, Dropdown, Navbar, Modal, Button } from 'flowbite-react';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2'; 
+import Swal from 'sweetalert2';
 import { URL } from '../ip';
 
 function Component() {
   const [openModal, setOpenModal] = useState(false);
   const [reservations, setReservations] = useState([]);
-
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
   useEffect(() => {
     if (openModal) {
-      fetch(URL+'api/reservation/getByPerson/3')
+      fetch(URL + `api/reservation/getByPerson/${userId}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
         .then(response => response.json())
         .then(data => {
           if (data.status === 'OK') {
@@ -45,7 +53,6 @@ function Component() {
     });
   };
 
-  const token = localStorage.getItem('token');
   const name = localStorage.getItem('name');
   const lastname = localStorage.getItem('lastname');
   const surname = localStorage.getItem('surname');
@@ -77,14 +84,16 @@ function Component() {
           {!showLogoutButton && <Link to="/login"><Dropdown.Item className='text-blue-800'>Iniciar Sesión</Dropdown.Item></Link>}
         </Dropdown>
         <Navbar />
-        <Modal size={"6xl"} show={openModal} onClose={() => setOpenModal(false)}>
-          <Modal.Header>Reservaciones</Modal.Header>
+        <Modal size={"4xl"} show={openModal} onClose={() => setOpenModal(false)}>
+          <Modal.Header>Mis Reservaciones</Modal.Header>
           <Modal.Body>
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-In</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-Out</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Ingreso</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Salida</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hotel</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Habitación</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -92,6 +101,8 @@ function Component() {
                   <tr key={reservation.reservationId}>
                     <td className="px-6 py-4 whitespace-nowrap">{reservation.checkin}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{reservation.checkout}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{reservation.hotel.hotelName}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{reservation.room.roomName}</td>
                   </tr>
                 ))}
               </tbody>

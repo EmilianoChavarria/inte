@@ -20,6 +20,7 @@ import RegistrarHabitacion from './Screens/hotelero/RegistrarHabitacion';
 import Profile from './Screens/user/Profile';
 import HotelsByUser from './Screens/admin/HotelsByUser';
 import Habitaciones from './Screens/admin/Habitaciones';
+import HomeRecepcionista from './Screens/recepcionista/HomeRecepcionista';
 
 function App() {
 
@@ -46,6 +47,8 @@ function App() {
                         <Route path="/registrarHabitacion/:hotelId" element={<RegistrarHabitacion />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path='/hotels/:userId' element={<HotelsByUser />} />
+                        {/* endpoint recepcionista */}
+                        <Route path="/homeRecepcionista" element={<HomeRecepcionista />} />
                     </Route>
 
                     <Route path="*" element={<Error />} />

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { URL } from '../../../ip';
 
 const Get = () => {
   const [hotels, setHotels] = useState([]);
 
   const fetchHotels = () => {
-    fetch('http://localhost:8080/api/hotel/')
+    fetch(URL+'api/hotel/')
       .then(response => {
         if (!response.ok) {
           throw new Error('No se pudo obtener la lista de hoteles');

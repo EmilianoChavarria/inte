@@ -13,7 +13,7 @@ function LoginForm() {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [attemptedSubmit, setAttemptedSubmit] = useState(false);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -34,8 +34,8 @@ function LoginForm() {
             username: email,
             password: password
         };
-    
-        fetch(URL+'api/auth/signin', {
+
+        fetch(URL + 'api/auth/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,10 +54,10 @@ function LoginForm() {
                     });
                 } else {
                     const token = result.data.token;
-    
+
                     localStorage.setItem('token', token);
                     console.log(`Token guardado en localStorage: ${localStorage.getItem('token')}`);
-    
+
                     const user = result.data.user;
                     localStorage.setItem('name', user.people.name);
                     localStorage.setItem('lastname', user.people.lastname);
@@ -65,14 +65,14 @@ function LoginForm() {
                     localStorage.setItem('peopleId', user.people.peopleId);
                     localStorage.setItem('userId', user.userId);
                     localStorage.setItem('email', user.email);
-    
+
                     console.log(`Nombre guardado en localStorage: ${localStorage.getItem('name')}`);
                     console.log(`Apellidos guardados en localStorage: ${localStorage.getItem('lastname')}`);
                     console.log(`UserId guardado en localStorage: ${localStorage.getItem('userId')}`);
-    
+
                     const userRole = JSON.parse(atob(token.split('.')[1])).roles[0].authority;
                     console.log(`UserRole: ${userRole}`);
-    
+
                     let redirectPath = '/';
                     switch (userRole) {
                         case 'ADMIN_ROLE':
@@ -81,6 +81,9 @@ function LoginForm() {
                         case 'HOTELERO_ROLE':
                             redirectPath = '/homeHotelero';
                             break;
+                        case 'RECEPTIONIST_ROLE':
+                            redirectPath = '/homeRecepcionista';
+                            break;
                         case 'USER_ROLE':
                             redirectPath = '/';
                             break;
@@ -88,28 +91,28 @@ function LoginForm() {
                             redirectPath = '/';
                             break;
                     }
-    
-                    
+
+
                     Swal.fire({
                         icon: 'success',
                         title: 'Inicio de sesión exitoso',
                         text: '¡Bienvenido!',
                         showConfirmButton: false,
-                        timer: 1300 
+                        timer: 1300
                     });
-    
-                    
+
+
                     setTimeout(() => {
-                        navigate(redirectPath); 
-                    },1300); 
+                        navigate(redirectPath);
+                    }, 1300);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
     };
-    
-    
+
+
 
 
 
