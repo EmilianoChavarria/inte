@@ -23,6 +23,12 @@ const Hoteles = () => {
         setFilterText(e.target.value);
     };
 
+    const saveHotelIdToLocalStorage = (hotelId) => {
+        localStorage.setItem('hotelIdP', hotelId);
+        //mandar a otra pantalla /productsRegistrar
+
+    };
+
     const filteredHotels = hotels.filter(hotel =>
         hotel.hotelName.toLowerCase().includes(filterText.toLowerCase()) ||
         hotel.address.toLowerCase().includes(filterText.toLowerCase()) ||
@@ -46,9 +52,15 @@ const Hoteles = () => {
                             </Button>
                         </Link>
                     </Tooltip>
-                    <Tooltip content="Inventario" placement="top" className="tooltip-centered">
-                        <Link to={`/hotels/${row.hotelId}`}>
-                            <Button color="success" size="xs" outline pill>
+                    <Tooltip content="Ver Inventario" placement="top" className="tooltip-centered">
+                        <Link to={"/products"}>
+                            <Button
+                                color="success"
+                                size="xs"
+                                outline
+                                pill
+                                onClick={() => saveHotelIdToLocalStorage(row.hotelId)}
+                            >
                                 <FaBoxOpen className="h-6 w-6" />
                             </Button>
                         </Link>

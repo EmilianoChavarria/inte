@@ -7,10 +7,10 @@ import { URL } from '../../ip';
 function Component() {
   const [openModal, setOpenModal] = useState(false);
   const [reservations, setReservations] = useState([]);
-
+const peopleId = localStorage.getItem('peopleId');
   useEffect(() => {
     if (openModal) {
-      fetch(URL+'api/reservation/getByPerson/3')
+      fetch(URL+`api/reservation/getByPerson/${peopleId}`)
         .then(response => response.json())
         .then(data => {
           if (data.status === 'OK') {

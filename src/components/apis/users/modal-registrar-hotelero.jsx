@@ -98,13 +98,13 @@ const ModalHotelero = () => {
                         </div>
                         {/* apellidos */}
                         <div className='flex flex-row'>
-                            <div className='mr-4'>
+                            <div className='mr-4 w-1/2'>
                                 <div className={`mb-2 block ${!isFieldValid('lastname') && 'text-red-500'}`}>
                                     <Label htmlFor="lastname" value="Primer Apellido" />
                                 </div>
                                 <TextInput id="lastname" type="text" placeholder="Primer Apellido" onChange={handleChange} name="lastname" color={!isFieldValid('lastname') ? 'failure' : ''} />
                             </div>
-                            <div>
+                            <div className='w-1/2'>
                                 <div className={`mb-2 block ${!isFieldValid('surname') && 'text-red-500'}`}>
                                     <Label htmlFor="surname" value="Segundo Apellido" />
                                 </div>
@@ -121,13 +121,13 @@ const ModalHotelero = () => {
 
                         {/* email y password */}
                         <div className='flex flex-row'>
-                            <div className='mr-4'>
+                            <div className='mr-4 w-1/2'>
                                 <div className={`mb-2 block ${!isFieldValid('email') && 'text-red-500'}`}>
                                     <Label htmlFor="email" value="Correo" />
                                 </div>
                                 <TextInput id="email" type="email" placeholder="name@flowbite.com" onChange={handleChange} name="email" color={!isFieldValid('email') ? 'failure' : ''} />
                             </div>
-                            <div>
+                            <div className='w-1/2'>
                                 <div className={`mb-2 block ${!isFieldValid('password') && 'text-red-500'}`}>
                                     <Label htmlFor="password" value="Contraseña" />
                                 </div>

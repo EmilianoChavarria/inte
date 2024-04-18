@@ -7,7 +7,7 @@ import { URL } from '../ip';
 function Component() {
   const [openModal, setOpenModal] = useState(false);
   const [reservations, setReservations] = useState([]);
-  const userId = localStorage.getItem('userId');
+  const userId = localStorage.getItem('peopleId');
   const token = localStorage.getItem('token');
   useEffect(() => {
     if (openModal) {
@@ -90,10 +90,8 @@ function Component() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Ingreso</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Salida</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hotel</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Habitación</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de ingreso</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de salida</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -101,8 +99,6 @@ function Component() {
                   <tr key={reservation.reservationId}>
                     <td className="px-6 py-4 whitespace-nowrap">{reservation.checkin}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{reservation.checkout}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{reservation.hotel.hotelName}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{reservation.room.roomName}</td>
                   </tr>
                 ))}
               </tbody>

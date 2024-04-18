@@ -35,6 +35,11 @@ const Hoteles = () => {
     const [hotels, setHotels] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const saveHotelIdToLocalStorage = (hotelId) => {
+        localStorage.setItem('hotelIdP', hotelId);
+        //mandar a otra pantalla /productsRegistrar
+
+    };
 
     const handleDeleteHotel = (hotelId) => {
         const token = localStorage.getItem('token');
@@ -50,7 +55,7 @@ const Hoteles = () => {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(URL+`api/hotel/delete/${hotelId}`, {
+                fetch(URL + `api/hotel/delete/${hotelId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -78,7 +83,7 @@ const Hoteles = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
-        fetch(URL+`api/hotel/findByUser/${userId}`, {
+        fetch(URL + `api/hotel/findByUser/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -145,9 +150,17 @@ const Hoteles = () => {
                                             </Link>
                                         </Tooltip>
                                         <Tooltip content="Ver Inventario" placement="top" className="tooltip-centered">
-                                            <Button color="success" size="xs" outline pill onClick={() => handleDeleteHotel(hotel.hotelId)}>
-                                                <FaBoxOpen className="h-6 w-6" />
-                                            </Button>
+                                            <Link to={"/products"}>
+                                                <Button
+                                                    color="success"
+                                                    size="xs"
+                                                    outline
+                                                    pill
+                                                    onClick={() => saveHotelIdToLocalStorage(hotel.hotelId)}
+                                                >
+                                                    <FaBoxOpen className="h-6 w-6" />
+                                                </Button>
+                                            </Link>
                                         </Tooltip>
                                     </div>
                                 </div>

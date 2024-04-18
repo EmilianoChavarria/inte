@@ -26,7 +26,7 @@ const RegistrarHabitacion = () => {
     //getAll de types http://localhost:8080/api/roomType/getAll
     useEffect(() => {
         const token = localStorage.getItem('token');
-        fetch(URL+'api/roomType/getAll', {
+        fetch(URL + 'api/roomType/getAll', {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`
@@ -56,8 +56,24 @@ const RegistrarHabitacion = () => {
 
         setSelectedFiles([...selectedFiles, ...newFiles]);
         setFieldValue('images', [...selectedFiles, ...newFiles]);
+
+        // Leer los archivos seleccionados como base64
+        newFiles.forEach((file) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                // Agregar la representación base64 al state
+                setFieldValue('imagePreviews', [...selectedFiles, e.target.result]);
+            };
+            reader.readAsDataURL(file);
+        });
     };
 
+    const createObjectURL = (file) => {
+        if (typeof URL !== 'undefined' && URL.createObjectURL) {
+            return URL.createObjectURL(file);
+        }
+        return '';
+    };
     return (
         <div className="flex">
             <SidebarComponent />
@@ -93,7 +109,7 @@ const RegistrarHabitacion = () => {
                             const token = localStorage.getItem('token');
                             console.log('Valores del formulario:', JSON.stringify(values));
                             try {
-                                const response = await fetch(URL+'api/room/saveWithImage', {
+                                const response = await fetch(URL + 'api/room/saveWithImage', {
                                     method: 'POST',
                                     headers: {
                                         Authorization: `Bearer ${token}`
@@ -154,9 +170,9 @@ const RegistrarHabitacion = () => {
                                                         X
                                                     </button>
                                                     <img
-                                                        className="object-cover"
-                                                        src={URL.createObjectURL(file)}
-                                                        alt={`Preview ${index}`}
+                                                        className='object-cover'
+                                                        src={selectedFiles[index] instanceof File ? createObjectURL(file) : file}
+                                                        
                                                         style={{ maxWidth: 250, maxHeight: 200, marginBottom: 10 }}
                                                     />
                                                 </div>

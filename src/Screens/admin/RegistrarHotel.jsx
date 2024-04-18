@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import SidebarComponent from './Sidebar';
 import { Button, FloatingLabel } from 'flowbite-react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
 import { URL } from '../../ip';
+import SidebarComponent from './Sidebar';
 
 const validationSchema = Yup.object().shape({
     hotelName: Yup.string().required('Campo Obligatorio'),
@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
     description: Yup.string().required('Campo Obligatorio'),
 });
 
-export const RegistrarHotel = () => {
+export const RegistrarHotelA = () => {
     const formRef = useRef(null);
     const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -46,6 +46,13 @@ export const RegistrarHotel = () => {
         newFiles.splice(index, 1);
         setSelectedFiles(newFiles);
         setFieldValue('images', newFiles);
+    };
+
+    const createObjectURL = (file) => {
+        if (typeof URL !== 'undefined' && URL.createObjectURL) {
+            return URL.createObjectURL(file);
+        }
+        return '';
     };
 
     return (
@@ -84,14 +91,14 @@ export const RegistrarHotel = () => {
 
 
                         try {
-                            const response = await fetch(URL+'api/hotel/saveHotelWithImages', {
+                            const response = await fetch(URL + 'api/hotel/saveHotelWithImages', {
                                 method: 'POST',
                                 headers: {
                                     Authorization: `Bearer ${token}`,
                                 },
                                 body: formData,
                             });
-                        
+
                             if (response.ok) {
                                 Swal.fire({
                                     icon: 'success',
@@ -108,7 +115,7 @@ export const RegistrarHotel = () => {
                         } finally {
                             setSubmitting(false);
                         }
-                        
+
                     }}
                 >
                     {({ isSubmitting, setFieldValue }) => (
@@ -149,7 +156,7 @@ export const RegistrarHotel = () => {
                                                 </button>
                                                 <img
                                                     className='object-cover'
-                                                    src={URL.createObjectURL(file)}
+                                                    src={createObjectURL(file)}
                                                     alt={`Preview ${index}`}
                                                     style={{ maxWidth: 250, maxHeight: 200, marginBottom: 10 }}
                                                 />

@@ -44,7 +44,7 @@ function SidebarComponent() {
                 <Sidebar.ItemGroup>
                     <div className="flex flex-col items-center">
                         <img src="https://i.ibb.co/NsBjwWd/istockphoto-1131164548-612x612.jpg" className="h-24 w-24" />
-                        <span className="inline-block text-blue-600 font-bold text-lg">{name} {lastname} {surname}</span>
+                        <span className=" text-center inline-block text-blue-600 font-bold text-lg">{name} {lastname} {surname}</span>
                         <span>{email}</span>
                     </div>
                 </Sidebar.ItemGroup>

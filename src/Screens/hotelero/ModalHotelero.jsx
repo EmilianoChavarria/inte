@@ -52,7 +52,7 @@ const ModalHotelero = ({ hotelId }) => {
         setAttemptedSubmit(true);
 
         try {
-            const response = await fetch(URL+'api/user/saveReceptionist', {
+            const response = await fetch(URL+'api/user/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -96,7 +96,7 @@ const ModalHotelero = ({ hotelId }) => {
             </div>
 
             <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
-                <Modal.Header>Registrar Hotelero</Modal.Header>
+                <Modal.Header>Registrar Recepcionista</Modal.Header>
                 <Modal.Body>
                     <form className="flex w-auto flex-col gap-1" onSubmit={handleSubmit}>
 
@@ -109,13 +109,13 @@ const ModalHotelero = ({ hotelId }) => {
                         </div>
                         {/* apellidos */}
                         <div className='flex flex-row'>
-                            <div className='mr-4'>
+                            <div className='mr-4 w-1/2'>
                                 <div className={`mb-2 block ${!isFieldValid('lastname') && 'text-red-500'}`}>
                                     <Label htmlFor="lastname" value="Primer Apellido" />
                                 </div>
                                 <TextInput id="lastname" type="text" placeholder="Primer Apellido" onChange={handleChange} name="lastname" color={!isFieldValid('lastname') ? 'failure' : ''} />
                             </div>
-                            <div>
+                            <div className='w-1/2'>
                                 <div className={`mb-2 block ${!isFieldValid('surname') && 'text-red-500'}`}>
                                     <Label htmlFor="surname" value="Segundo Apellido" />
                                 </div>
@@ -132,13 +132,13 @@ const ModalHotelero = ({ hotelId }) => {
 
                         {/* email y password */}
                         <div className='flex flex-row'>
-                            <div className='mr-4'>
+                            <div className='mr-4 w-1/2'>
                                 <div className={`mb-2 block ${!isFieldValid('email') && 'text-red-500'}`}>
                                     <Label htmlFor="email" value="Correo" />
                                 </div>
                                 <TextInput id="email" type="email" placeholder="name@flowbite.com" onChange={handleChange} name="email" color={!isFieldValid('email') ? 'failure' : ''} />
                             </div>
-                            <div>
+                            <div className='w-1/2'>
                                 <div className={`mb-2 block ${!isFieldValid('password') && 'text-red-500'}`}>
                                     <Label htmlFor="password" value="Contraseña" />
                                 </div>

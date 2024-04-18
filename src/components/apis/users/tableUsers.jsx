@@ -13,7 +13,7 @@ function TableUsers() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        fetch(URL+'api/user/findAll', {
+        fetch(URL + 'api/user/findAll', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -27,7 +27,7 @@ function TableUsers() {
     }, []);
 
     const handleDeleteuser = (id) => {
-        fetch(URL+`api/user/${id}`, {
+        fetch(URL + `api/user/${id}`, {
             method: 'DELETE'
         })
             .then(response => response.json())
@@ -56,13 +56,16 @@ function TableUsers() {
             cell: (row) => {
                 const isHotelero = row.rol === 4 || row.rol.rolName === 'HOTELERO_ROLE';
                 const canDelete = row.userId !== 1;
-                
+
                 return (
                     <div className='flex flex-row justify-end space-x-2'>
                         {isHotelero && (
                             <Tooltip content="Ver Hoteles" placement="top" className="tooltip-centered">
                                 <Link to={`/hotels/${row.userId}`}>
-                                    <Button color="blue" size="xs" outline pill>
+                                    <Button color="blue" size="xs" outline pill onClick={() => {
+                                        localStorage.setItem('userIdR', row.userId);
+                                    }}
+                                    >
                                         <FaHotel className="h-6 w-6" />
                                     </Button>
                                 </Link>
@@ -79,7 +82,7 @@ function TableUsers() {
                 );
             },
         },
-        
+
         ,
     ];
 

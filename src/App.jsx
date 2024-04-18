@@ -21,6 +21,9 @@ import Profile from './Screens/user/Profile';
 import HotelsByUser from './Screens/admin/HotelsByUser';
 import Habitaciones from './Screens/admin/Habitaciones';
 import HomeRecepcionista from './Screens/recepcionista/HomeRecepcionista';
+import { RegistrarHotelA } from './Screens/admin/RegistrarHotel';
+import ProductForm from './Screens/hotelero/Products';
+import HotelProductsTable from './Screens/hotelero/ProductList';
 
 function App() {
 
@@ -35,10 +38,12 @@ function App() {
                     <Route path="/rooms/:hotelId" element={<RoomViewHotel />} />
                     <Route path="/findOneHotel/:hotelId" element={<FindOneHotel />} />
                     <Route path="/findOneRoom/:roomId" element={<FindOneRoom />} />
-                    <Route path="/products" element={<Products />} />
+                    <Route path="/products" element={<HotelProductsTable />} />
                     <Route element={<ProtectedRoutes />}>
                         {/* endpoints admin */}
                         <Route path="/homeAdmin" element={<HomeAdmin />} />
+                        <Route path='/registrarHotel' element={<RegistrarHotelA />} />
+
                         {/* endpoint hotelero */}
                         <Route path="/homeHotelero" element={<HomeHotelero />} />
                         <Route path='/registrarHotel' element={<RegistrarHotel />} />
@@ -47,6 +52,7 @@ function App() {
                         <Route path="/registrarHabitacion/:hotelId" element={<RegistrarHabitacion />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path='/hotels/:userId' element={<HotelsByUser />} />
+                        <Route path="/registrarProduct" element={<ProductForm />} />
                         {/* endpoint recepcionista */}
                         <Route path="/homeRecepcionista" element={<HomeRecepcionista />} />
                     </Route>
